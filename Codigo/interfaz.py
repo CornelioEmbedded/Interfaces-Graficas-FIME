@@ -16,6 +16,8 @@ button_9 = Button(root, text='9', padx = 40, pady= 20)
 button_0 = Button(root, text='0', padx = 40, pady= 20)
 button_cl = Button(root, text='Clear', padx = 79, pady= 20)
 
+but = Button(root, text='LED 1', padx = 79, pady= 20)
+
 button_1.grid(row = 3, column = 0)
 button_2.grid(row = 3, column = 1)
 button_3.grid(row = 3, column = 2)
@@ -27,5 +29,6 @@ button_8.grid(row = 1, column = 1)
 button_9.grid(row = 1, column = 2)
 button_0.grid(row = 4, column = 0)
 button_cl.grid(row = 4, column= 1, columnspan=2)
+but.grid(row = 1, column= 9)
 
 root.mainloop()
