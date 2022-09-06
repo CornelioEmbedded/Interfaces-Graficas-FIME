@@ -1,8 +1,11 @@
 from tkinter import *
+from PIL import ImageTk, Image
 
 root = Tk()
 root.title('Interfaz Grafica')
 
+led_e = ImageTk.PhotoImage(Image.open(r"C:\Users\UJSCRQU\OneDrive-Deere&Co\OneDrive - Deere & Co\Desktop\Cursos\Interfaces-Graficas-FIME\Codigo\Imagenes\led_apagado.png"))
+label = Label(image = led_e)
 
 button_1 = Button(root, text='1', padx = 40, pady= 20)
 button_2 = Button(root, text='2', padx = 40, pady= 20)
@@ -29,6 +32,6 @@ button_8.grid(row = 1, column = 1)
 button_9.grid(row = 1, column = 2)
 button_0.grid(row = 4, column = 0)
 button_cl.grid(row = 4, column= 1, columnspan=2)
-but.grid(row = 1, column= 9)
+label.grid(row = 1, column= 9)
 
 root.mainloop()
