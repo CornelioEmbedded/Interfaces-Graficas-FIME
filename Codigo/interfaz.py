@@ -5,8 +5,10 @@ from funciones import *
 root = Tk()
 root.title('Interfaz Grafica')
 
-# led_e = ImageTk.PhotoImage(Image.open(r"C:\Users\UJSCRQU\OneDrive-Deere&Co\OneDrive - Deere & Co\Desktop\Cursos\Interfaces-Graficas-FIME\Codigo\Imagenes\led_apagado.png"))
-# label = Label(image = led_e)
+#led_e = ImageTk.PhotoImage(Image.open(r""))
+#label = Label(image = led_e)
+
+texto = Label(text = 'Teclado para display 7 sgementos')
 
 button_1 = Button(root, text='1', padx = 40, pady= 20, command = lambda : click(1))
 button_2 = Button(root, text='2', padx = 40, pady= 20, command = lambda : click(2))
@@ -20,7 +22,7 @@ button_9 = Button(root, text='9', padx = 40, pady= 20, command = lambda : click(
 button_0 = Button(root, text='0', padx = 40, pady= 20, command = lambda : click(0))
 button_cl = Button(root, text='Clear', padx = 79, pady= 20, command = lambda : clear())
 
-texto = Text(root,text = 'Teclado para display 7 segmentos' )
+#texto = Text(root,text = 'Teclado para display 7 segmentos' )
 # but = Button(root, text='LED 1', padx = 79, pady= 20)
 
 button_1.grid(row = 3, column = 0)
@@ -34,7 +36,7 @@ button_8.grid(row = 1, column = 1)
 button_9.grid(row = 1, column = 2)
 button_0.grid(row = 4, column = 0)
 button_cl.grid(row = 4, column= 1, columnspan=2)
-texto.grid(row = 0, column = 0)
+texto.grid(row = 0, column = 0, columnspan= 2)
 # label.grid(row = 1, column= 9)
 
 root.mainloop()
