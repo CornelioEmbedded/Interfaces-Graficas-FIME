@@ -8,7 +8,7 @@ root.title('Interfaz Grafica')
 #led_e = ImageTk.PhotoImage(Image.open(r""))
 #label = Label(image = led_e)
 
-texto = Label(text = 'Teclado para display 7 sgementos')
+texto = Label(text = 'Teclado para display 7 segmentos')
 
 button_1 = Button(root, text='1', padx = 40, pady= 20, command = lambda : click(1))
 button_2 = Button(root, text='2', padx = 40, pady= 20, command = lambda : click(2))
