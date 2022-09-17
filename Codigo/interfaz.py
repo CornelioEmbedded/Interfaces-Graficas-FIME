@@ -7,8 +7,6 @@ HEIGHT = 600
 WIDTH = 1200
 COLOR_BACKGROUND = '#80c1ff'
 
-
-
 root = Tk()
 root.title('Interfaz Grafica')
 
