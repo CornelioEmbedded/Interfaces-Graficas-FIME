@@ -53,25 +53,35 @@ def set_leds(led_off_1, led_off_2, led_off_3, led_off_4, led_on_1, led_on_2, led
 
 
 def show_leds_on(label_led_on_1, label_led_on_2, label_led_on_3, label_led_on_4):
-    label_led_on_1.place(x =100, y = 100)
-    label_led_on_2.place(x = 100, y = 200)
-    label_led_on_3.place(x = 100, y = 300)
-    label_led_on_4.place(x = 100, y = 400)
+    
+    label_led_on_1.place(x =525, y = 200)
+    label_led_on_2.place(x = 525, y = 300)
+    label_led_on_3.place(x = 525, y = 400)
+    label_led_on_4.place(x = 525, y = 500)
 
 def show_leds_off(label_led_off_1, label_led_off_2, label_led_off_3, label_led_off_4):
-    label_led_off_1.place(x =400, y = 100)
-    label_led_off_2.place(x = 400, y = 200)
-    label_led_off_3.place(x = 400, y = 300)
-    label_led_off_4.place(x = 400, y = 400)
+    label_led_off_1.place(x =525, y = 200)
+    label_led_off_2.place(x = 525, y = 300)
+    label_led_off_3.place(x = 525, y = 400)
+    label_led_off_4.place(x = 525, y = 500)
 
 def hide_leds_on(label_led_on_1, label_led_on_2, label_led_on_3, label_led_on_4):
-    label_led_on_1.pack_forget()
-    label_led_on_2.pack_forget()
-    label_led_on_3.pack_forget()
-    label_led_on_4.pack_forget()
+    label_led_on_1.place(x =2000, y = 100)
+    label_led_on_2.place(x = 2000, y = 200)
+    label_led_on_3.place(x = 2000, y = 300)
+    label_led_on_4.place(x = 2000, y = 400)
+
+def single_led(selection, label_led_on_1, label_led_on_2, label_led_on_3, label_led_on_4):
+
+
+    if selection == 1:
+        label_led_on_1.place(x =525, y = 200)
+    elif selection == 2:
+        label_led_on_2.place(x = 525, y = 300)
+    elif selection == 3:
+        label_led_on_3.place(x = 525, y = 400)
+    elif selection == 4:
+        label_led_on_4.place(x = 525, y = 500)
+    else:
+        hide_leds_on(label_led_on_1, label_led_on_2, label_led_on_3, label_led_on_4)
     
-def hide_leds_off(label_led_off_1, label_led_off_2, label_led_off_3, label_led_off_4):
-    label_led_off_1.pack_forget()
-    label_led_off_2.pack_forget()
-    label_led_off_3.pack_forget()
-    label_led_off_4.pack_forget()

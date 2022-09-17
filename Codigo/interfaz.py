@@ -47,21 +47,16 @@ keyword(frame_keyword)
 
 off_1, off_2, off_3, off_4, on_1, on_2, on_3, on_4 = set_leds(led_off_1, led_off_2, led_off_3, led_off_4, led_on_1, led_on_2, led_on_3,led_on_4)
 
+show_leds_off(off_1, off_2, off_3, off_4)
+
 decision = 0
 
 while decision == 0:
 
     num = int(input('Digite un numero: '))
+    single_led(num, on_1, on_2, on_3, on_4)
 
-    if num == 1:
         
-        show_leds_on(on_1, on_2, on_3, on_4)
-        
-    elif num == 2:
-    
-        hide_leds_on(on_1, on_2, on_3, on_4)
-    else:
-        break
 
 
 root.mainloop()
