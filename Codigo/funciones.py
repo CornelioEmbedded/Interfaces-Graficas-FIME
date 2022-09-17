@@ -1,13 +1,14 @@
 from tkinter import *
 
 def click(number):
+    
     print(number)
 
 def clear():
+
     print('')
 
 def keyword(frame):
-
 
     button_1 = Button(frame, text='1', padx = 40, pady= 20, command = lambda : click(1))
     button_2 = Button(frame, text='2', padx = 40, pady= 20, command = lambda : click(2))
