@@ -1,4 +1,6 @@
 from tkinter import *
+from turtle import width
+from PIL import ImageTk, Image
 
 def click(number):
     
@@ -33,3 +35,43 @@ def keyword(frame):
     button_9.grid(row = 1, column = 3)
     button_0.grid(row = 4, column = 1)
     button_cl.grid(row = 4, column= 2, columnspan=2)
+
+def set_leds(led_off_1, led_off_2, led_off_3, led_off_4, led_on_1, led_on_2, led_on_3,led_on_4):
+
+    label_led_off_1 = Label(image = led_off_1)
+    label_led_off_2 = Label(image = led_off_2)
+    label_led_off_3 = Label(image = led_off_3)
+    label_led_off_4 = Label(image = led_off_4)
+
+    label_led_on_1 = Label(image = led_on_1)
+    label_led_on_2 = Label(image = led_on_2)
+    label_led_on_3 = Label(image = led_on_3)
+    label_led_on_4 = Label(image = led_on_4)
+
+    return label_led_off_1, label_led_off_2, label_led_off_3, label_led_off_4, label_led_on_1, label_led_on_2, label_led_on_3, label_led_on_4
+
+
+
+def show_leds_on(label_led_on_1, label_led_on_2, label_led_on_3, label_led_on_4):
+    label_led_on_1.place(x =100, y = 100)
+    label_led_on_2.place(x = 100, y = 200)
+    label_led_on_3.place(x = 100, y = 300)
+    label_led_on_4.place(x = 100, y = 400)
+
+def show_leds_off(label_led_off_1, label_led_off_2, label_led_off_3, label_led_off_4):
+    label_led_off_1.place(x =400, y = 100)
+    label_led_off_2.place(x = 400, y = 200)
+    label_led_off_3.place(x = 400, y = 300)
+    label_led_off_4.place(x = 400, y = 400)
+
+def hide_leds_on(label_led_on_1, label_led_on_2, label_led_on_3, label_led_on_4):
+    label_led_on_1.pack_forget()
+    label_led_on_2.pack_forget()
+    label_led_on_3.pack_forget()
+    label_led_on_4.pack_forget()
+    
+def hide_leds_off(label_led_off_1, label_led_off_2, label_led_off_3, label_led_off_4):
+    label_led_off_1.pack_forget()
+    label_led_off_2.pack_forget()
+    label_led_off_3.pack_forget()
+    label_led_off_4.pack_forget()
