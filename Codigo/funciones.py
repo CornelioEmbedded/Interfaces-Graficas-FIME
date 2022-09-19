@@ -76,4 +76,30 @@ def single_led(selection, label_led_on_1, label_led_on_2, label_led_on_3, label_
         label_led_on_4.place(x = 600, y = 400)
     else:
         hide_leds_on(label_led_on_1, label_led_on_2, label_led_on_3, label_led_on_4)
-    
+
+def ADC(frame):
+    voltage = '5 V'
+    voltage1 = '5 V'
+    voltage2 = '5 V'
+    voltage3 = '5 V'
+
+    voltage_1 = Message(frame, text= voltage, bd = 15, font= 'BOLD')
+    voltage_2 = Message(frame, text= voltage1, bd = 15, font= 'BOLD')
+    voltage_3 = Message(frame, text= voltage2, bd = 15, font= 'BOLD')
+    voltage_4 = Message(frame, text= voltage3, bd = 15, font= 'BOLD')
+
+
+    voltage_1.place(x =125, y = 250)
+    voltage_2.place(x =125, y = 325)
+    voltage_3.place(x =125, y = 400)
+    voltage_4.place(x =125, y = 475)
+
+def ADC_background(frame):
+    X = 115
+    Y = 245
+
+    for i in range (0,4):
+        frame_voltage = Frame(frame, bg= '#FF4040')
+        frame_voltage.place(x =X, y = Y, width=90, height=65)
+
+        Y += 75
