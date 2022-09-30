@@ -2,6 +2,7 @@ from distutils.cmd import Command
 from tkinter import *
 from PIL import *
 from funciones import *
+import serial, time
 
 HEIGHT = 600
 WIDTH = 1200
