@@ -38,11 +38,11 @@ void loop() {
   pos3 = map(value_pot_3, 0, 1023, 0, 100);
   pos4 = map(value_pot_4, 0, 1023, 0, 100);
 
-for(int i = 0; i<=9; i++)
-{
-  display(i);
-  delay(250);
-}
+  for(int i = 0; i<=9; i++)
+  {
+    display(i);
+    delay(250);
+  }
 
 //  Serial.println(value_pot_1);
 //  Serial.println(value_pot_2);
