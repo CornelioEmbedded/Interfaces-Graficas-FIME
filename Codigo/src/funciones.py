@@ -30,8 +30,6 @@ def click(numero):
 def clear():
     display_arduino.write(b'clear')
 
-    print('')
-
 def keyword(frame):
 
     button_1 = Button(frame, text='1', padx = 40, pady= 20, command = lambda : click(1))
