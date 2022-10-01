@@ -157,6 +157,17 @@ void display(int numero)
     digitalWrite(8,HIGH);
     break;
 
+    default:
+    digitalWrite(2,LOW);
+    digitalWrite(3,LOW);
+    digitalWrite(4,LOW);
+    digitalWrite(6,LOW);
+    digitalWrite(5,LOW);
+    digitalWrite(7,LOW);
+    digitalWrite(8,LOW);
+    break;
+    
+
     
   }
   
