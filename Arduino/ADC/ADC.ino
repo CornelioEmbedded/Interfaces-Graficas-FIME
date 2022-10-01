@@ -9,7 +9,7 @@ int pos2;
 int pos3;
 int pos4;
 
-int contador;
+char input;
 
 void setup() {
   Serial.begin(9600);
@@ -38,21 +38,16 @@ void loop() {
   pos3 = map(value_pot_3, 0, 1023, 0, 100);
   pos4 = map(value_pot_4, 0, 1023, 0, 100);
 
-  for(int i = 0; i<=9; i++)
+  if(Serial.available() > 0)
   {
-    display(i);
-    delay(250);
+    input = Serial.read();
+    display_decision(input);
+
+    
   }
-
-//  Serial.println(value_pot_1);
-//  Serial.println(value_pot_2);
-//  Serial.println(value_pot_3);
-//  Serial.println(value_pot_4);
-
 }
 
-
-void display(int numero)
+void displayLed(int numero)
 {
   switch(numero)
   {
@@ -157,7 +152,7 @@ void display(int numero)
     digitalWrite(8,HIGH);
     break;
 
-    default:
+    case 10:
     digitalWrite(2,LOW);
     digitalWrite(3,LOW);
     digitalWrite(4,LOW);
@@ -171,4 +166,54 @@ void display(int numero)
     
   }
   
+}
+
+void display_decision(int input)
+{
+  switch(input)
+    {
+      case '0':
+      displayLed(0);
+      break;
+      
+      case '1':
+      displayLed(1);
+      break;
+      
+      case '2':
+      displayLed(2);
+      break;
+
+      case '3':
+      displayLed(3);
+      break;
+
+      case '4':
+      displayLed(4);
+      break;
+
+      case '5':
+      displayLed(5);
+      break;
+
+      case '6':
+      displayLed(6);
+      break;
+
+      case '7':
+      displayLed(7);
+      break;
+
+      case '8':
+      displayLed(8);
+      break;
+
+      case '9':
+      displayLed(9);
+      break;
+
+      default:
+      displayLed(10);
+      break;
+    }
 }
