@@ -1,12 +1,34 @@
 from tkinter import *
 from turtle import width
 from PIL import ImageTk, Image
+import serial
 
-def click(number):
-    
-    print(number)
+display_arduino = serial.Serial('com3', 9600, timeout = 1)
+
+def click(numero):
+    if numero == 1:
+        display_arduino.write(b'1')
+    elif numero == 2:
+        display_arduino.write(b'2')
+    elif numero == 3:
+        display_arduino.write(b'3')
+    elif numero == 4:
+        display_arduino.write(b'4')
+    elif numero == 5:
+        display_arduino.write(b'5')
+    elif numero == 6:
+        display_arduino.write(b'6')
+    elif numero == 7:
+        display_arduino.write(b'7')
+    elif numero == 8:
+        display_arduino.write(b'8')
+    elif numero == 9:
+        display_arduino.write(b'9')
+    elif numero == 0:
+        display_arduino.write(b'0')
 
 def clear():
+    display_arduino.write(b'clear')
 
     print('')
 

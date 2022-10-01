@@ -2,11 +2,14 @@ from distutils.cmd import Command
 from tkinter import *
 from PIL import *
 from funciones import *
+import serial
 
 HEIGHT = 600
 WIDTH = 1200
 COLOR_BACKGROUND = '#80c1ff'
 COLOR_SHAPE = 	"#FF4040"
+
+
 
 root = Tk()
 root.title('Interfaz Grafica')
@@ -54,8 +57,5 @@ while decision == 0:
 
     num = int(input('Digite un numero: '))
     single_led(num, on_1, on_2, on_3, on_4)
-
-        
-
 
 root.mainloop()
