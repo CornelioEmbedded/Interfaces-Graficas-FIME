@@ -1,5 +1,4 @@
 from tkinter import *
-from turtle import width
 from PIL import ImageTk, Image
 import serial
 
