@@ -1,33 +1,92 @@
 from tkinter import *
 from PIL import ImageTk, Image
 import serial
+import threading
+import time
 
-display_arduino = serial.Serial('com3', 9600, timeout = 1)
+arduino = serial.Serial('com3', 9600, timeout = 1)
+
+class MainFrame(Frame):
+    def __init__(self, master=None):
+        super().__init__(master, width=420, height=270)
+        self.master = master                    
+        self.pack()
+        
+        self.hilo_pot1 = threading.Thread(target=self.getSensorValues,daemon=True)
+        self.hilo_pot2 = threading.Thread(target=self.getSensorValues,daemon=True)
+        self.hilo_pot3 = threading.Thread(target=self.getSensorValues,daemon=True)
+        self.hilo_pot4 = threading.Thread(target=self.getSensorValues,daemon=True)
+
+        time.sleep(1)
+        
+        self.value_pot1 = StringVar()
+        self.value_pot2 = StringVar()
+        self.value_pot3 = StringVar()
+        self.value_pot4 = StringVar()
+
+        self.create_widgets()
+        self.isRun=True
+
+        self.hilo_pot1.start()
+        self.hilo_pot2.start()
+        self.hilo_pot3.start()
+        self.hilo_pot4.start()
+    
+    def getSensorValues(self):
+        while self.isRun:
+            cad = arduino.readline().decode('ascii').strip()
+            if cad:         
+                pos=cad.index(":")
+
+                label=cad[:pos]
+                value=cad[pos+1:]                 
+
+                if label == 'pot[1]':
+                    self.value_pot1.set(value)
+                if label == 'pot[2]':
+                    self.value_pot2.set(value)
+                if label == 'pot[3]':
+                    self.value_pot3.set(value)
+                if label == 'pot[4]':
+                    self.value_pot4.set(value)
+
+    def create_widgets(self):
+        Label(self,text="Pot[1]: ").place(x=30,y=20)
+        Label(self,width=6,textvariable=self.value_pot1).place(x=120,y=20)
+
+        Label(self,text="Pot[2]: ").place(x=30,y=50)
+        Label(self,width=6,textvariable=self.value_pot2).place(x=120,y=50)
+
+        Label(self,text="Pot[3]: ").place(x=30,y=80)
+        Label(self,width=6,textvariable=self.value_pot3).place(x=120,y=80)
+
+        Label(self,text="Pot[4]: ").place(x=30,y=110)
+        Label(self,width=6,textvariable=self.value_pot4).place(x=120,y=110)
 
 def click(numero):
     if numero == 1:
-        display_arduino.write(b'1')
+        arduino.write(b'1')
     elif numero == 2:
-        display_arduino.write(b'2')
+        arduino.write(b'2')
     elif numero == 3:
-        display_arduino.write(b'3')
+        arduino.write(b'3')
     elif numero == 4:
-        display_arduino.write(b'4')
+        arduino.write(b'4')
     elif numero == 5:
-        display_arduino.write(b'5')
+        arduino.write(b'5')
     elif numero == 6:
-        display_arduino.write(b'6')
+        arduino.write(b'6')
     elif numero == 7:
-        display_arduino.write(b'7')
+        arduino.write(b'7')
     elif numero == 8:
-        display_arduino.write(b'8')
+        arduino.write(b'8')
     elif numero == 9:
-        display_arduino.write(b'9')
+        arduino.write(b'9')
     elif numero == 0:
-        display_arduino.write(b'0')
+        arduino.write(b'0')
 
 def clear():
-    display_arduino.write(b'clear')
+    arduino.write(b'clear')
 
 def keyword(frame):
 
