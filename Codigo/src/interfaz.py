@@ -51,6 +51,7 @@ decision = 0
 Label(root, text="POTENCIOMETROS", bg = COLOR_BACKGROUND, font = LETTERS).place(x=28,y=215)
 Label(root, text="BOTONES", bg = COLOR_BACKGROUND, font = LETTERS).place(x=370,y=215)
 Label(root, text="DISPLAY", bg = COLOR_BACKGROUND, font = LETTERS).place(x=760,y=215)
-ADC = MainFrame(frame_pot)
+
+Potenciometer = ADC(frame_pot)
 
 root.mainloop()

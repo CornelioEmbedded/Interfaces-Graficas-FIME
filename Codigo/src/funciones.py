@@ -6,7 +6,7 @@ import time
 
 arduino = serial.Serial('com3', 9600, timeout = 1)
 
-class MainFrame(Frame):
+class ADC(Frame):
     def __init__(self, master=None):
         super().__init__(master, width=420, height=270)
         self.master = master                    
