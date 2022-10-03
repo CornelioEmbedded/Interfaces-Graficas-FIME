@@ -21,7 +21,6 @@ led_on_1 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_encendido.png"))
 led_on_2 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_encendido.png"))
 led_on_3 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_encendido.png"))
 led_on_4 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_encendido.png"))
-
 canvas = Canvas(root, height= HEIGHT, width=WIDTH)
 canvas.pack()
 
@@ -53,5 +52,6 @@ Label(root, text="BOTONES", bg = COLOR_BACKGROUND, font = LETTERS).place(x=370,y
 Label(root, text="DISPLAY", bg = COLOR_BACKGROUND, font = LETTERS).place(x=760,y=215)
 
 Potenciometer = ADC(frame_pot)
+Leds = LEDS(root)
 
 root.mainloop()

@@ -65,6 +65,71 @@ class ADC(Frame):
         Label(self,text="Pot[4]: ").place(x=30,y=130)
         Label(self,width=WIDHT,textvariable=self.value_pot4).place(x=70,y=130)
 
+
+class LEDS(Frame):
+    def __init__(self, master=None):
+        super().__init__(master, width=420, height=270)
+        self.master = master                    
+        self.pack()
+        
+        self.hilo_bot1 = threading.Thread(target=self.getButtonValues,daemon=True)
+        self.hilo_bot2 = threading.Thread(target=self.getButtonValues,daemon=True)
+        self.hilo_bot3 = threading.Thread(target=self.getButtonValues,daemon=True)
+        self.hilo_bot4 = threading.Thread(target=self.getButtonValues,daemon=True)
+
+        time.sleep(1)
+        
+        self.value_bot1 = StringVar()
+        self.value_bot2 = StringVar()
+        self.value_bot3 = StringVar()
+        self.value_bot4 = StringVar()
+
+        self.single_led()
+        self.isRun=True
+
+        self.hilo_bot1.start()
+        self.hilo_bot2.start()
+        self.hilo_bot3.start()
+        self.hilo_bot4.start()
+
+    def images(self):
+        self.led_off_1 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_apagado.png"))
+        self.led_off_2 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_apagado.png"))
+        self.led_off_3 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_apagado.png"))
+        self.led_off_4 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_apagado.png"))
+        self.led_on_1 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_encendido.png"))
+        self.led_on_2 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_encendido.png"))
+        self.led_on_3 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_encendido.png"))
+        self.led_on_4 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_encendido.png"))
+
+    def getButtonValues(self):
+        while self.isRun:
+            cad = arduino.readline().decode('ascii').strip()
+            if cad:         
+                pos=cad.index(":")
+
+                label=cad[:pos]
+                value=cad[pos+1:]                 
+
+                if label == 'bot[1]':
+                    self.value_bot1.set(value)
+                if label == 'bot[2]':
+                    self.value_bot2.set(value)
+                if label == 'bot[3]':
+                    self.value_bot3.set(value)
+                if label == 'bot[4]':
+                    self.value_bot4.set(value)
+
+    def single_led(self):
+        if self.value_bot1 == 0:
+            Label(self, image = self.led_on_1).place(x =250, y = 250)
+        if self.value_bot2 == 0:
+            Label(self, image = self.led_on_2).place(x = 420, y = 250)
+        if self.value_bot3 == 0:
+            Label(self, image = self.led_on_3).place(x = 250, y = 350)
+        if self.value_bot4 == 0:
+            Label(self, image = self.led_on_4).place(x = 420, y = 350)
+
 def click(numero):
     if numero == 1:
         arduino.write(b'1')
@@ -137,22 +202,4 @@ def show_leds_off(label_led_off_1, label_led_off_2, label_led_off_3, label_led_o
     label_led_off_3.place(x = 250, y = 350)
     label_led_off_4.place(x = 420, y = 350)
 
-def hide_leds_on(label_led_on_1, label_led_on_2, label_led_on_3, label_led_on_4):
-    label_led_on_1.place(x =2000, y = 100)
-    label_led_on_2.place(x = 2000, y = 200)
-    label_led_on_3.place(x = 2000, y = 300)
-    label_led_on_4.place(x = 2000, y = 400)
 
-def single_led(selection, label_led_on_1, label_led_on_2, label_led_on_3, label_led_on_4):
-
-
-    if selection == 1:
-        label_led_on_1.place(x =250, y = 250)
-    elif selection == 2:
-        label_led_on_2.place(x = 420, y = 250)
-    elif selection == 3:
-        label_led_on_3.place(x = 250, y = 350)
-    elif selection == 4:
-        label_led_on_4.place(x = 420, y = 350)
-    else:
-        hide_leds_on(label_led_on_1, label_led_on_2, label_led_on_3, label_led_on_4)
