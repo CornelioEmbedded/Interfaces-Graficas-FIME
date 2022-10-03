@@ -8,6 +8,7 @@ HEIGHT = 600
 WIDTH = 1000
 COLOR_BACKGROUND = '#A9A9A9'
 COLOR_SHAPE = 	"#104E8B"
+LETTERS = ('Arial', 13)
 
 root = Tk()
 root.title('Interfaz Grafica')
@@ -47,6 +48,9 @@ show_leds_off(off_1, off_2, off_3, off_4)
 
 decision = 0
 
+Label(root, text="POTENCIOMETROS", bg = COLOR_BACKGROUND, font = LETTERS).place(x=28,y=215)
+Label(root, text="BOTONES", bg = COLOR_BACKGROUND, font = LETTERS).place(x=370,y=215)
+Label(root, text="DISPLAY", bg = COLOR_BACKGROUND, font = LETTERS).place(x=760,y=215)
 ADC = MainFrame(frame_pot)
 
 root.mainloop()
