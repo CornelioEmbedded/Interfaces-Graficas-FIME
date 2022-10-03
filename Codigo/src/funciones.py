@@ -9,7 +9,7 @@ X_LEDS_2 = 420
 Y_LEDS_1 = 250
 Y_LEDS_2 = 350 
 
-arduino = serial.Serial('com3', 9600, timeout = 1)
+arduino = serial.Serial('com5', 9600, timeout = 1)
 
 class ADC_LEDS(Frame):
     def __init__(self, master=None):
@@ -21,22 +21,13 @@ class ADC_LEDS(Frame):
         self.hilo_pot2 = threading.Thread(target=self.getSensorValues,daemon=True)
         self.hilo_pot3 = threading.Thread(target=self.getSensorValues,daemon=True)
         self.hilo_pot4 = threading.Thread(target=self.getSensorValues,daemon=True)
-        self.hilo_bot1 = threading.Thread(target=self.getButtonValues,daemon=True)
-        self.hilo_bot2 = threading.Thread(target=self.getButtonValues,daemon=True)
-        self.hilo_bot3 = threading.Thread(target=self.getButtonValues,daemon=True)
-        self.hilo_bot4 = threading.Thread(target=self.getButtonValues,daemon=True)
-
+        
         time.sleep(1)
         
         self.value_pot1 = StringVar()
         self.value_pot2 = StringVar()
         self.value_pot3 = StringVar()
         self.value_pot4 = StringVar()
-
-        self.value_bot1 = IntVar()
-        self.value_bot2 = IntVar()
-        self.value_bot3 = IntVar()
-        self.value_bot4 = IntVar()
 
         self.create_widgets()
         self.isRun=True
@@ -45,17 +36,6 @@ class ADC_LEDS(Frame):
         self.hilo_pot2.start()
         self.hilo_pot3.start()
         self.hilo_pot4.start()
-
-        self.hilo_bot1.start()
-        self.hilo_bot2.start()
-        self.hilo_bot3.start()
-        self.hilo_bot4.start()
-
-        self.led_on_1 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_encendido.png"))
-        self.led_on_2 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_encendido.png"))
-        self.led_on_3 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_encendido.png"))
-        self.led_on_4 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_encendido.png"))
-
     
     def getSensorValues(self):
         while self.isRun:
@@ -90,26 +70,81 @@ class ADC_LEDS(Frame):
         Label(self,text="Pot[4]: ").place(x=30,y=130)
         Label(self,width=WIDHT,textvariable=self.value_pot4).place(x=70,y=130)
 
+class LEDS(Frame):
+    def __init__(self, master=None):
+        super().__init__(master, width=420, height=270)
+        self.master = master                    
+        self.pack()
+        
+        self.hilo_bot1 = threading.Thread(target=self.getButtonValues,daemon=True)
+        self.hilo_bot2 = threading.Thread(target=self.getButtonValues,daemon=True)
+        self.hilo_bot3 = threading.Thread(target=self.getButtonValues,daemon=True)
+        self.hilo_bot4 = threading.Thread(target=self.getButtonValues,daemon=True)
+
+        time.sleep(1)
+        
+        self.value_bot1 = IntVar()
+        self.value_bot2 = IntVar()
+        self.value_bot3 = IntVar()
+        self.value_bot4 = IntVar()
+
+        self.isRun=True
+
+        self.hilo_bot1.start()
+        self.hilo_bot2.start()
+        self.hilo_bot3.start()
+        self.hilo_bot4.start()
+
+        self.led_off_1 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_apagado.png"))
+        self.led_on_1 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_encendido.png"))
+
+    
     def getButtonValues(self):
+
+        POS_1_X = 20
+        POS_2_X = 230
+        POS_1_Y = 50
+        POS_2_Y = 150
+        POS_GONE_X = 1000
+        POS_GONE_Y = 0
+
         while self.isRun:
-            cad = arduino.readline().decode('ascii').strip()
+            cad =arduino.readline().decode('ascii').strip()
             if cad:         
-                pos=cad.index(":")
+                pos=cad.index("-")
 
                 label=cad[:pos]
                 value=cad[pos+1:]                 
 
                 if label == 'bot[1]':
                     self.value_bot1.set(value)
-                    print(self.value_bot1.get())
+                    Label(self, image = self.led_off_1).place(x = POS_1_X, y = POS_1_Y)
+                    if self.value_bot1.get() == 0:
+                        Label(self, image = self.led_on_1).place(x = POS_1_X, y = POS_1_Y)
+                    else:
+                        Label(self, image = self.led_on_1).place(x = POS_GONE_X, y = POS_GONE_Y)
                 if label == 'bot[2]':
                     self.value_bot2.set(value)
-
+                    Label(self, image = self.led_off_1).place(x =POS_2_X, y = POS_1_Y)
+                    if self.value_bot2.get() == 0:
+                        Label(self, image = self.led_on_1).place(x = POS_2_X, y = POS_1_Y)
+                    else:
+                        Label(self, image = self.led_on_1).place(x = POS_GONE_X, y = POS_GONE_Y)
                 if label == 'bot[3]':
                     self.value_bot3.set(value)
-
+                    Label(self, image = self.led_off_1).place(x = POS_1_X, y = POS_2_Y)
+                    if self.value_bot3.get() == 0:
+                        Label(self, image = self.led_on_1).place(x = POS_1_X, y = POS_2_Y)
+                    else:
+                        Label(self, image = self.led_on_1).place(x = POS_GONE_X, y = POS_GONE_Y)
                 if label == 'bot[4]':
                     self.value_bot4.set(value)
+                    Label(self, image = self.led_off_1).place(x = POS_2_X, y = POS_2_Y)
+                    if self.value_bot4.get() == 0:
+                        Label(self, image = self.led_on_1).place(x = POS_2_X, y = POS_2_Y)
+                    else:
+                        Label(self, image = self.led_on_1).place(x =POS_GONE_X, y = POS_GONE_Y)
+                
 
 def click(numero):
     if numero == 1:

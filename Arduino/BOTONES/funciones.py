@@ -23,7 +23,6 @@ class MainFrame(Frame):
         self.value_bot3 = IntVar()
         self.value_bot4 = IntVar()
 
-        self.create_widgets()
         self.isRun=True
 
         self.hilo_bot1.start()
@@ -32,53 +31,44 @@ class MainFrame(Frame):
         self.hilo_bot4.start()
 
         self.led_off_1 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_apagado.png"))
-        self.led_off_2 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_apagado.png"))
-        self.led_off_3 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_apagado.png"))
-        self.led_off_4 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_apagado.png"))
         self.led_on_1 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_encendido.png"))
-        self.led_on_2 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_encendido.png"))
-        self.led_on_3 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_encendido.png"))
-        self.led_on_4 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_encendido.png"))
 
     
     def getButtonValues(self):
         while self.isRun:
             cad =self.arduino.readline().decode('ascii').strip()
             if cad:         
-                pos=cad.index(":")
+                pos=cad.index("-")
 
                 label=cad[:pos]
                 value=cad[pos+1:]                 
 
                 if label == 'bot[1]':
                     self.value_bot1.set(value)
-                    Label(self, image = self.led_off_1).place(x =0, y = 0)
+                    Label(self, image = self.led_off_1).place(x = 50, y = 50)
                     if self.value_bot1.get() == 0:
-                        Label(self, image = self.led_on_1).place(x =0, y = 0)
+                        Label(self, image = self.led_on_1).place(x = 50, y = 50)
                     else:
                         Label(self, image = self.led_on_1).place(x =1000, y = 0)
                 if label == 'bot[2]':
                     self.value_bot2.set(value)
-                    Label(self, image = self.led_off_1).place(x =200, y = 0)
+                    Label(self, image = self.led_off_1).place(x = 250, y = 50)
                     if self.value_bot2.get() == 0:
-                        Label(self, image = self.led_on_1).place(x =200, y = 0)
+                        Label(self, image = self.led_on_1).place(x =250, y = 50)
                     else:
                         Label(self, image = self.led_on_1).place(x =1000, y = 0)
                 if label == 'bot[3]':
                     self.value_bot3.set(value)
-                    Label(self, image = self.led_off_1).place(x =0, y = 200)
+                    Label(self, image = self.led_off_1).place(x = 50, y = 150)
                     if self.value_bot3.get() == 0:
-                        Label(self, image = self.led_on_1).place(x =0, y = 200)
+                        Label(self, image = self.led_on_1).place(x =50, y = 150)
                     else:
                         Label(self, image = self.led_on_1).place(x =1000, y = 0)
                 if label == 'bot[4]':
                     self.value_bot4.set(value)
-                    Label(self, image = self.led_off_1).place(x = 200, y = 200)
+                    Label(self, image = self.led_off_1).place(x = 250, y = 150)
                     if self.value_bot4.get() == 0:
-                        Label(self, image = self.led_on_1).place(x = 200, y = 200)
+                        Label(self, image = self.led_on_1).place(x = 250, y = 150)
                     else:
                         Label(self, image = self.led_on_1).place(x =1000, y = 0)
                 
-    
-    def create_widgets(self):
-        pass
