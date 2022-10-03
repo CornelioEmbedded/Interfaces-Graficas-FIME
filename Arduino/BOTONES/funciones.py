@@ -52,6 +52,7 @@ class MainFrame(Frame):
 
                 if label == 'bot[1]':
                     self.value_bot1.set(value)
+                    print(self.value_bot1.get())
                     Label(self, image = self.led_off_1).place(x =0, y = 0)
                     if self.value_bot1.get() == 0:
                         Label(self, image = self.led_on_1).place(x =0, y = 0)
