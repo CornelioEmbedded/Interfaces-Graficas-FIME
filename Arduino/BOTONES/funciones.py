@@ -2,6 +2,7 @@ from tkinter import Frame,Label,Button,Checkbutton,Scale,StringVar,IntVar
 import serial
 import time
 import threading
+from PIL import ImageTk, Image
 
 class MainFrame(Frame):
     def __init__(self, master=None):
@@ -17,10 +18,10 @@ class MainFrame(Frame):
         self.arduino = serial.Serial("COM3",9600)
         time.sleep(1)
         
-        self.value_bot1 = StringVar()
-        self.value_bot2 = StringVar()
-        self.value_bot3 = StringVar()
-        self.value_bot4 = StringVar()
+        self.value_bot1 = IntVar()
+        self.value_bot2 = IntVar()
+        self.value_bot3 = IntVar()
+        self.value_bot4 = IntVar()
 
         self.create_widgets()
         self.isRun=True
@@ -29,6 +30,16 @@ class MainFrame(Frame):
         self.hilo_bot2.start()
         self.hilo_bot3.start()
         self.hilo_bot4.start()
+
+        self.led_off_1 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_apagado.png"))
+        self.led_off_2 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_apagado.png"))
+        self.led_off_3 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_apagado.png"))
+        self.led_off_4 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_apagado.png"))
+        self.led_on_1 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_encendido.png"))
+        self.led_on_2 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_encendido.png"))
+        self.led_on_3 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_encendido.png"))
+        self.led_on_4 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_encendido.png"))
+
     
     def getButtonValues(self):
         while self.isRun:
@@ -41,6 +52,11 @@ class MainFrame(Frame):
 
                 if label == 'bot[1]':
                     self.value_bot1.set(value)
+                    Label(self, image = self.led_off_1).place(x =0, y = 0)
+                    if self.value_bot1.get() == 0:
+                        Label(self, image = self.led_on_1).place(x =0, y = 0)
+                    else:
+                        Label(self, image = self.led_on_1).place(x =1000, y = 0)
                 if label == 'bot[2]':
                     self.value_bot2.set(value)
                 if label == 'bot[3]':
@@ -50,14 +66,4 @@ class MainFrame(Frame):
                 
     
     def create_widgets(self):
-        Label(self,text="Pot[1]: ").place(x=30,y=20)
-        Label(self,width=6,textvariable=self.value_bot1).place(x=120,y=20)
-
-        Label(self,text="Pot[2]: ").place(x=30,y=50)
-        Label(self,width=6,textvariable=self.value_bot2).place(x=120,y=50)
-
-        Label(self,text="Pot[3]: ").place(x=30,y=80)
-        Label(self,width=6,textvariable=self.value_bot3).place(x=120,y=80)
-
-        Label(self,text="Pot[4]: ").place(x=30,y=110)
-        Label(self,width=6,textvariable=self.value_bot4).place(x=120,y=110)
+        pass
