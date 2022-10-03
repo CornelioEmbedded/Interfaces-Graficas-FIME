@@ -51,17 +51,19 @@ class MainFrame(Frame):
                     self.value_pot4.set(value)
 
     def create_widgets(self):
-        Label(self,text="Pot[1]: ").place(x=30,y=20)
-        Label(self,width=6,textvariable=self.value_pot1).place(x=120,y=20)
+        WIDHT = 6
+
+        Label(self,text="Pot[1]: ").place(x=30,y=10)
+        Label(self,width=WIDHT,textvariable=self.value_pot1).place(x=70,y=10)
 
         Label(self,text="Pot[2]: ").place(x=30,y=50)
-        Label(self,width=6,textvariable=self.value_pot2).place(x=120,y=50)
+        Label(self,width=WIDHT,textvariable=self.value_pot2).place(x=70,y=50)
 
-        Label(self,text="Pot[3]: ").place(x=30,y=80)
-        Label(self,width=6,textvariable=self.value_pot3).place(x=120,y=80)
+        Label(self,text="Pot[3]: ").place(x=30,y=90)
+        Label(self,width=WIDHT,textvariable=self.value_pot3).place(x=70,y=90)
 
-        Label(self,text="Pot[4]: ").place(x=30,y=110)
-        Label(self,width=6,textvariable=self.value_pot4).place(x=120,y=110)
+        Label(self,text="Pot[4]: ").place(x=30,y=130)
+        Label(self,width=WIDHT,textvariable=self.value_pot4).place(x=70,y=130)
 
 def click(numero):
     if numero == 1:
@@ -130,10 +132,10 @@ def set_leds(led_off_1, led_off_2, led_off_3, led_off_4, led_on_1, led_on_2, led
 
 
 def show_leds_off(label_led_off_1, label_led_off_2, label_led_off_3, label_led_off_4):
-    label_led_off_1.place(x =425, y = 300)
-    label_led_off_2.place(x = 600, y = 300)
-    label_led_off_3.place(x = 425, y = 400)
-    label_led_off_4.place(x = 600, y = 400)
+    label_led_off_1.place(x = 250, y = 250)
+    label_led_off_2.place(x = 420, y = 250)
+    label_led_off_3.place(x = 250, y = 350)
+    label_led_off_4.place(x = 420, y = 350)
 
 def hide_leds_on(label_led_on_1, label_led_on_2, label_led_on_3, label_led_on_4):
     label_led_on_1.place(x =2000, y = 100)
@@ -145,13 +147,13 @@ def single_led(selection, label_led_on_1, label_led_on_2, label_led_on_3, label_
 
 
     if selection == 1:
-        label_led_on_1.place(x =425, y = 300)
+        label_led_on_1.place(x =250, y = 250)
     elif selection == 2:
-        label_led_on_2.place(x = 600, y = 300)
+        label_led_on_2.place(x = 420, y = 250)
     elif selection == 3:
-        label_led_on_3.place(x = 425, y = 400)
+        label_led_on_3.place(x = 250, y = 350)
     elif selection == 4:
-        label_led_on_4.place(x = 600, y = 400)
+        label_led_on_4.place(x = 420, y = 350)
     else:
         hide_leds_on(label_led_on_1, label_led_on_2, label_led_on_3, label_led_on_4)
 

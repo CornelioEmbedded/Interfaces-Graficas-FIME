@@ -5,9 +5,9 @@ from funciones import *
 import serial
 
 HEIGHT = 600
-WIDTH = 1200
-COLOR_BACKGROUND = '#80c1ff'
-COLOR_SHAPE = 	"#FF4040"
+WIDTH = 1000
+COLOR_BACKGROUND = '#A9A9A9'
+COLOR_SHAPE = 	"#104E8B"
 
 root = Tk()
 root.title('Interfaz Grafica')
@@ -28,16 +28,16 @@ frame_background = Frame(root, bg = COLOR_BACKGROUND)
 frame_background.place(width=WIDTH, height=HEIGHT)
 
 frame_keyword_zone = Frame(root, bg = COLOR_BACKGROUND, bd = 5)
-frame_keyword_zone.place(width=300, height=600, x=1000, y=0, anchor = N)
+frame_keyword_zone.place(width=300, height=600, x=800, y=0, anchor = N)
 
 frame_leds_zone = Frame(root, bg = COLOR_BACKGROUND, bd = 5)
-frame_leds_zone.place(width=300, height=600, x = 600, y = 0, anchor = N)
+frame_leds_zone.place(width=300, height=600, x = 400, y = 0, anchor = N)
 
-frame_pot = Frame(root, bg = COLOR_BACKGROUND, bd = 5)
-frame_pot.place(width=200, height=150, x = 200, y = 275, anchor = N)
+frame_pot = Frame(root, bg = COLOR_SHAPE, bd = 5)
+frame_pot.place(width=150, height=160, x = 100, y = 250, anchor = N)
 
 frame_keyword = Frame(root, bg = COLOR_SHAPE, bd = 5)
-frame_keyword.place(width=297, height=265, x=1000, y=250, anchor = N)
+frame_keyword.place(width=297, height=265, x=800, y=250, anchor = N)
 
 keyword(frame_keyword)
 
