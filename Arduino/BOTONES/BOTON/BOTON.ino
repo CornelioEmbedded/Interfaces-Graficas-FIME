@@ -5,7 +5,7 @@ int value_bot_2;
 int value_bot_3;
 int value_bot_4;
 
-int tiempo = 300;
+int tiempo = 150;
 
 void get_bot_1()
 {

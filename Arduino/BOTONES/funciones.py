@@ -15,7 +15,7 @@ class MainFrame(Frame):
         self.hilo_bot3 = threading.Thread(target=self.getButtonValues,daemon=True)
         self.hilo_bot4 = threading.Thread(target=self.getButtonValues,daemon=True)
 
-        self.arduino = serial.Serial("COM3",9600)
+        self.arduino = serial.Serial("COM5",9600)
         time.sleep(1)
         
         self.value_bot1 = IntVar()
@@ -52,7 +52,6 @@ class MainFrame(Frame):
 
                 if label == 'bot[1]':
                     self.value_bot1.set(value)
-                    print(self.value_bot1.get())
                     Label(self, image = self.led_off_1).place(x =0, y = 0)
                     if self.value_bot1.get() == 0:
                         Label(self, image = self.led_on_1).place(x =0, y = 0)
@@ -60,10 +59,25 @@ class MainFrame(Frame):
                         Label(self, image = self.led_on_1).place(x =1000, y = 0)
                 if label == 'bot[2]':
                     self.value_bot2.set(value)
+                    Label(self, image = self.led_off_1).place(x =200, y = 0)
+                    if self.value_bot2.get() == 0:
+                        Label(self, image = self.led_on_1).place(x =200, y = 0)
+                    else:
+                        Label(self, image = self.led_on_1).place(x =1000, y = 0)
                 if label == 'bot[3]':
                     self.value_bot3.set(value)
+                    Label(self, image = self.led_off_1).place(x =0, y = 200)
+                    if self.value_bot3.get() == 0:
+                        Label(self, image = self.led_on_1).place(x =0, y = 200)
+                    else:
+                        Label(self, image = self.led_on_1).place(x =1000, y = 0)
                 if label == 'bot[4]':
                     self.value_bot4.set(value)
+                    Label(self, image = self.led_off_1).place(x = 200, y = 200)
+                    if self.value_bot4.get() == 0:
+                        Label(self, image = self.led_on_1).place(x = 200, y = 200)
+                    else:
+                        Label(self, image = self.led_on_1).place(x =1000, y = 0)
                 
     
     def create_widgets(self):
