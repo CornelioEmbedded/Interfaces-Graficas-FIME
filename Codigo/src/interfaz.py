@@ -37,6 +37,6 @@ Label(root, text="POTENCIOMETROS", bg = COLOR_BACKGROUND, font = LETTERS).place(
 Label(root, text="BOTONES", bg = COLOR_BACKGROUND, font = LETTERS).place(x=370,y=215)
 Label(root, text="DISPLAY", bg = COLOR_BACKGROUND, font = LETTERS).place(x=760,y=215)
 
-Potenciometer = ADC_LEDS(frame_pot)
-Leds = LEDS(frame_leds_zone)
+ADC(frame_pot)
+LEDS(frame_leds_zone)
 root.mainloop()

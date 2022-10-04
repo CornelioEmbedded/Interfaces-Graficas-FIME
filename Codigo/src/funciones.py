@@ -46,13 +46,13 @@ class ADC(Frame):
                 label=cad[:pos]
                 value=cad[pos+1:]                 
 
-                if label == 'pot[1]':
+                if label == 'sen[1]':
                     self.value_pot1.set(value)
-                if label == 'pot[2]':
+                if label == 'sen[2]':
                     self.value_pot2.set(value)
-                if label == 'pot[3]':
+                if label == 'sen[3]':
                     self.value_pot3.set(value)
-                if label == 'pot[4]':
+                if label == 'sen[4]':
                     self.value_pot4.set(value)
 
     def create_widgets(self):
@@ -111,33 +111,33 @@ class LEDS(Frame):
         while self.isRun:
             cad =arduino.readline().decode('ascii').strip()
             if cad:         
-                pos=cad.index("-")
+                pos=cad.index(":")
 
                 label=cad[:pos]
                 value=cad[pos+1:]                 
 
-                if label == 'bot[1]':
+                if label == 'sen[5]':
                     self.value_bot1.set(value)
                     Label(self, image = self.led_off_1).place(x = POS_1_X, y = POS_1_Y)
                     if self.value_bot1.get() == 0:
                         Label(self, image = self.led_on_1).place(x = POS_1_X, y = POS_1_Y)
                     else:
                         Label(self, image = self.led_on_1).place(x = POS_GONE_X, y = POS_GONE_Y)
-                if label == 'bot[2]':
+                if label == 'sen[6]':
                     self.value_bot2.set(value)
                     Label(self, image = self.led_off_1).place(x =POS_2_X, y = POS_1_Y)
                     if self.value_bot2.get() == 0:
                         Label(self, image = self.led_on_1).place(x = POS_2_X, y = POS_1_Y)
                     else:
                         Label(self, image = self.led_on_1).place(x = POS_GONE_X, y = POS_GONE_Y)
-                if label == 'bot[3]':
+                if label == 'sen[7]':
                     self.value_bot3.set(value)
                     Label(self, image = self.led_off_1).place(x = POS_1_X, y = POS_2_Y)
                     if self.value_bot3.get() == 0:
                         Label(self, image = self.led_on_1).place(x = POS_1_X, y = POS_2_Y)
                     else:
                         Label(self, image = self.led_on_1).place(x = POS_GONE_X, y = POS_GONE_Y)
-                if label == 'bot[4]':
+                if label == 'sen[8]':
                     self.value_bot4.set(value)
                     Label(self, image = self.led_off_1).place(x = POS_2_X, y = POS_2_Y)
                     if self.value_bot4.get() == 0:
