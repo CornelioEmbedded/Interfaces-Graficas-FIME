@@ -13,7 +13,7 @@ arduino = serial.Serial('com3', 9600, timeout = 1)
 
 class ADC(Frame):
     def __init__(self, master=None):
-        super().__init__(master, width=420, height=270)
+        super().__init__(master, width=620, height=270)
         self.master = master                    
         self.pack()
         
@@ -111,16 +111,16 @@ class ADC(Frame):
         WIDHT = 6
 
         Label(self,text="Pot[1]: ").place(x=10,y=10)
-        Label(self,width=WIDHT,textvariable=self.value_pot1).place(x=40,y=10)
+        Label(self,width=WIDHT,textvariable=self.value_pot1).place(x=50,y=10)
 
         Label(self,text="Pot[2]: ").place(x=10,y=50)
-        Label(self,width=WIDHT,textvariable=self.value_pot2).place(x=40,y=50)
+        Label(self,width=WIDHT,textvariable=self.value_pot2).place(x=50,y=50)
 
         Label(self,text="Pot[3]: ").place(x=10,y=90)
-        Label(self,width=WIDHT,textvariable=self.value_pot3).place(x=40,y=90)
+        Label(self,width=WIDHT,textvariable=self.value_pot3).place(x=50,y=90)
 
         Label(self,text="Pot[4]: ").place(x=10,y=130)
-        Label(self,width=WIDHT,textvariable=self.value_pot4).place(x=40,y=130)
+        Label(self,width=WIDHT,textvariable=self.value_pot4).place(x=50,y=130)
     
 
 def click(numero):
