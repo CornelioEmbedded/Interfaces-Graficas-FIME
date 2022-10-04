@@ -4,11 +4,16 @@ import serial
 import threading
 import time
 
+X_LEDS_1 = 250
+X_LEDS_2 = 420
+Y_LEDS_1 = 250
+Y_LEDS_2 = 350 
+
 arduino = serial.Serial('com3', 9600, timeout = 1)
 
 class ADC(Frame):
     def __init__(self, master=None):
-        super().__init__(master, width=420, height=270)
+        super().__init__(master, width=620, height=270)
         self.master = master                    
         self.pack()
         
@@ -16,13 +21,21 @@ class ADC(Frame):
         self.hilo_pot2 = threading.Thread(target=self.getSensorValues,daemon=True)
         self.hilo_pot3 = threading.Thread(target=self.getSensorValues,daemon=True)
         self.hilo_pot4 = threading.Thread(target=self.getSensorValues,daemon=True)
-
+        self.hilo_bot1 = threading.Thread(target=self.getSensorValues,daemon=True)
+        self.hilo_bot2 = threading.Thread(target=self.getSensorValues,daemon=True)
+        self.hilo_bot3 = threading.Thread(target=self.getSensorValues,daemon=True)
+        self.hilo_bot4 = threading.Thread(target=self.getSensorValues,daemon=True)
+        
         time.sleep(1)
         
         self.value_pot1 = StringVar()
         self.value_pot2 = StringVar()
         self.value_pot3 = StringVar()
         self.value_pot4 = StringVar()
+        self.value_bot1 = IntVar()
+        self.value_bot2 = IntVar()
+        self.value_bot3 = IntVar()
+        self.value_bot4 = IntVar()
 
         self.create_widgets()
         self.isRun=True
@@ -31,8 +44,24 @@ class ADC(Frame):
         self.hilo_pot2.start()
         self.hilo_pot3.start()
         self.hilo_pot4.start()
+        self.hilo_bot1.start()
+        self.hilo_bot2.start()
+        self.hilo_bot3.start()
+        self.hilo_bot4.start()
+
+        self.led_off_1 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_apagado.png"))
+        self.led_on_1 = ImageTk.PhotoImage(Image.open(r"Codigo\Imagenes\led_encendido.png"))
+
     
     def getSensorValues(self):
+
+        POS_1_X = 180
+        POS_2_X = 390
+        POS_1_Y = 50
+        POS_2_Y = 150
+        POS_GONE_X = 1000
+        POS_GONE_Y = 0
+
         while self.isRun:
             cad = arduino.readline().decode('ascii').strip()
             if cad:         
@@ -41,29 +70,58 @@ class ADC(Frame):
                 label=cad[:pos]
                 value=cad[pos+1:]                 
 
-                if label == 'pot[1]':
+                if label == 'sen[1]':
                     self.value_pot1.set(value)
-                if label == 'pot[2]':
+                if label == 'sen[2]':
                     self.value_pot2.set(value)
-                if label == 'pot[3]':
+                if label == 'sen[3]':
                     self.value_pot3.set(value)
-                if label == 'pot[4]':
+                if label == 'sen[4]':
                     self.value_pot4.set(value)
+                if label == 'sen[5]':
+                    self.value_bot1.set(value)
+                    Label(self, image = self.led_off_1).place(x = POS_1_X, y = POS_1_Y)
+                    if self.value_bot1.get() == 0:
+                        Label(self, image = self.led_on_1).place(x = POS_1_X, y = POS_1_Y)
+                    else:
+                        Label(self, image = self.led_on_1).place(x = POS_GONE_X, y = POS_GONE_Y)
+                if label == 'sen[6]':
+                    self.value_bot2.set(value)
+                    Label(self, image = self.led_off_1).place(x =POS_2_X, y = POS_1_Y)
+                    if self.value_bot2.get() == 0:
+                        Label(self, image = self.led_on_1).place(x = POS_2_X, y = POS_1_Y)
+                    else:
+                        Label(self, image = self.led_on_1).place(x = POS_GONE_X, y = POS_GONE_Y)
+                if label == 'sen[7]':
+                    self.value_bot3.set(value)
+                    Label(self, image = self.led_off_1).place(x = POS_1_X, y = POS_2_Y)
+                    if self.value_bot3.get() == 0:
+                        Label(self, image = self.led_on_1).place(x = POS_1_X, y = POS_2_Y)
+                    else:
+                        Label(self, image = self.led_on_1).place(x = POS_GONE_X, y = POS_GONE_Y)
+                if label == 'sen[8]':
+                    self.value_bot4.set(value)
+                    Label(self, image = self.led_off_1).place(x = POS_2_X, y = POS_2_Y)
+                    if self.value_bot4.get() == 0:
+                        Label(self, image = self.led_on_1).place(x = POS_2_X, y = POS_2_Y)
+                    else:
+                        Label(self, image = self.led_on_1).place(x =POS_GONE_X, y = POS_GONE_Y)
 
     def create_widgets(self):
         WIDHT = 6
 
-        Label(self,text="Pot[1]: ").place(x=30,y=10)
-        Label(self,width=WIDHT,textvariable=self.value_pot1).place(x=70,y=10)
+        Label(self,text="Pot[1]: ").place(x=10,y=10)
+        Label(self,width=WIDHT,textvariable=self.value_pot1).place(x=50,y=10)
 
-        Label(self,text="Pot[2]: ").place(x=30,y=50)
-        Label(self,width=WIDHT,textvariable=self.value_pot2).place(x=70,y=50)
+        Label(self,text="Pot[2]: ").place(x=10,y=50)
+        Label(self,width=WIDHT,textvariable=self.value_pot2).place(x=50,y=50)
 
-        Label(self,text="Pot[3]: ").place(x=30,y=90)
-        Label(self,width=WIDHT,textvariable=self.value_pot3).place(x=70,y=90)
+        Label(self,text="Pot[3]: ").place(x=10,y=90)
+        Label(self,width=WIDHT,textvariable=self.value_pot3).place(x=50,y=90)
 
-        Label(self,text="Pot[4]: ").place(x=30,y=130)
-        Label(self,width=WIDHT,textvariable=self.value_pot4).place(x=70,y=130)
+        Label(self,text="Pot[4]: ").place(x=10,y=130)
+        Label(self,width=WIDHT,textvariable=self.value_pot4).place(x=50,y=130)
+    
 
 def click(numero):
     if numero == 1:
@@ -116,19 +174,14 @@ def keyword(frame):
     button_0.grid(row = 4, column = 1)
     button_cl.grid(row = 4, column= 2, columnspan=2)
 
-def set_leds(led_off_1, led_off_2, led_off_3, led_off_4, led_on_1, led_on_2, led_on_3,led_on_4):
+def set_leds(led_off_1, led_off_2, led_off_3, led_off_4):
 
     label_led_off_1 = Label(image = led_off_1)
     label_led_off_2 = Label(image = led_off_2)
     label_led_off_3 = Label(image = led_off_3)
     label_led_off_4 = Label(image = led_off_4)
 
-    label_led_on_1 = Label(image = led_on_1)
-    label_led_on_2 = Label(image = led_on_2)
-    label_led_on_3 = Label(image = led_on_3)
-    label_led_on_4 = Label(image = led_on_4)
-
-    return label_led_off_1, label_led_off_2, label_led_off_3, label_led_off_4, label_led_on_1, label_led_on_2, label_led_on_3, label_led_on_4
+    return label_led_off_1, label_led_off_2, label_led_off_3, label_led_off_4
 
 
 def show_leds_off(label_led_off_1, label_led_off_2, label_led_off_3, label_led_off_4):
@@ -137,22 +190,4 @@ def show_leds_off(label_led_off_1, label_led_off_2, label_led_off_3, label_led_o
     label_led_off_3.place(x = 250, y = 350)
     label_led_off_4.place(x = 420, y = 350)
 
-def hide_leds_on(label_led_on_1, label_led_on_2, label_led_on_3, label_led_on_4):
-    label_led_on_1.place(x =2000, y = 100)
-    label_led_on_2.place(x = 2000, y = 200)
-    label_led_on_3.place(x = 2000, y = 300)
-    label_led_on_4.place(x = 2000, y = 400)
 
-def single_led(selection, label_led_on_1, label_led_on_2, label_led_on_3, label_led_on_4):
-
-
-    if selection == 1:
-        label_led_on_1.place(x =250, y = 250)
-    elif selection == 2:
-        label_led_on_2.place(x = 420, y = 250)
-    elif selection == 3:
-        label_led_on_3.place(x = 250, y = 350)
-    elif selection == 4:
-        label_led_on_4.place(x = 420, y = 350)
-    else:
-        hide_leds_on(label_led_on_1, label_led_on_2, label_led_on_3, label_led_on_4)

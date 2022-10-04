@@ -5,35 +5,77 @@ int value_pot_2;
 int value_pot_3;
 int value_pot_4;
 
+int value_bot_1;
+int value_bot_2;
+int value_bot_3;
+int value_bot_4;
+
+int tiempo = 50;
+int tiempo1 = 50;
+
 char input;
+char input_2;
+
+/************************FUNCIONES DE POTENCIOMETROS*************************************/
 
 void get_pot_1()
 {
   value_pot_1 = analogRead(A0);
-  Serial.println("pot[1]:" + String(value_pot_1));
+  Serial.println("sen[1]:" + String(value_pot_1));
 }
-Ticker tic_pot_1(get_pot_1, 500);
+Ticker tic_pot_1(get_pot_1, tiempo);
 
 void get_pot_2()
 {
   value_pot_2 = analogRead(A1);
-  Serial.println("pot[2]:" + String(value_pot_2));
+  Serial.println("sen[2]:" + String(value_pot_2));
 }
-Ticker tic_pot_2(get_pot_2, 500);
+Ticker tic_pot_2(get_pot_2, tiempo);
 
 void get_pot_3()
 {
   value_pot_3 = analogRead(A2);
-  Serial.println("pot[3]:" + String(value_pot_3));
+  Serial.println("sen[3]:" + String(value_pot_3));
 }
-Ticker tic_pot_3(get_pot_3, 500);
+Ticker tic_pot_3(get_pot_3, tiempo);
 
 void get_pot_4()
 {
   value_pot_4 = analogRead(A3);
-  Serial.println("pot[4]:" + String(value_pot_4));
+  Serial.println("sen[4]:" + String(value_pot_4));
 }
-Ticker tic_pot_4(get_pot_4, 500);
+Ticker tic_pot_4(get_pot_4, tiempo1);
+
+/************************FUNCIONES DE BOTONES*************************************/
+
+void get_bot_1()
+{
+  value_bot_1 = digitalRead(9);
+  Serial.println("sen[5]:" + String(value_bot_1));
+}
+Ticker tic_bot_1(get_bot_1, tiempo1);
+
+void get_bot_2()
+{
+  value_bot_2 = digitalRead(10);
+  Serial.println("sen[6]:" + String(value_bot_2));
+}
+Ticker tic_bot_2(get_bot_2, tiempo1);
+
+void get_bot_3()
+{
+  value_bot_3 = digitalRead(11);
+  Serial.println("sen[7]:" + String(value_bot_3));
+}
+Ticker tic_bot_3(get_bot_3, tiempo1);
+
+void get_bot_4()
+{
+  value_bot_4 = digitalRead(12);
+  Serial.println("sen[8]:" + String(value_bot_4));
+}
+Ticker tic_bot_4(get_bot_4, tiempo1);
+
 
 void setup() {
   Serial.begin(9600);
@@ -48,28 +90,43 @@ void setup() {
     pinMode(i,OUTPUT);
   }
 
+  for(int i = 9; i<=12; i++)
+  {
+    pinMode(i, INPUT);
+  }
+
   tic_pot_1.start();
   tic_pot_2.start();
   tic_pot_3.start();
   tic_pot_4.start();
 
+  tic_bot_1.start();
+  tic_bot_2.start();
+  tic_bot_3.start();
+  tic_bot_4.start();
+
 }
 
-void loop() {
-
+void loop(){
+  
   tic_pot_1.update();
   tic_pot_2.update();
   tic_pot_3.update();
   tic_pot_4.update();
+  tic_bot_1.update();
+  tic_bot_2.update();
+  tic_bot_3.update();
+  tic_bot_4.update();
 
   if(Serial.available() > 0)
   {
     input = Serial.read();
     display_decision(input);
-
     
   }
 }
+
+/************************FUNCIONES DEL DISPLAY*************************************/
 
 void displayLed(int numero)
 {
@@ -195,7 +252,7 @@ void displayLed(int numero)
 void display_decision(int input)
 {
   switch(input)
-    {
+    { 
       case '0':
       displayLed(0);
       break;
