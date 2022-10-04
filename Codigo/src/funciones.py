@@ -9,9 +9,9 @@ X_LEDS_2 = 420
 Y_LEDS_1 = 250
 Y_LEDS_2 = 350 
 
-arduino = serial.Serial('com5', 9600, timeout = 1)
+arduino = serial.Serial('com3', 9600, timeout = 1)
 
-class ADC_LEDS(Frame):
+class ADC(Frame):
     def __init__(self, master=None):
         super().__init__(master, width=420, height=270)
         self.master = master                    
