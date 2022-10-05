@@ -10,8 +10,8 @@ int value_bot_2;
 int value_bot_3;
 int value_bot_4;
 
-int tiempo = 50;
-int tiempo1 = 50;
+int tiempo = 150;
+int tiempo1 = 150;
 
 char input;
 char input_2;
